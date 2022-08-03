@@ -2821,6 +2821,14 @@ function detectShellcodePlain($data) {
 	global $global_libemu, $malwaredir;
 	//$malware['found'] = 0;
 
+    if (empty($global_libemu)) {
+        return 'not found';
+    }
+
+    if (empty($malwaredir)) {
+        $malwaredir = sys_get_temp_dir() . '/pdfexaminer-';
+    }
+
 	$filename = $malwaredir."shell_".uniqid();
 	$fp = fopen($filename, "w");
 	fwrite($fp, $data);
@@ -2844,6 +2852,14 @@ function detectShellcodePlain($data) {
 
 function nasm($data, $loc = 0) {
 	global $malwaredir, $global_nasm;
+
+    if (empty($global_nasm)) {
+        return '';
+    }
+
+    if (empty($malwaredir)) {
+        $malwaredir = sys_get_temp_dir() . '/pdfexaminer-';
+    }
 
 	$filename = $malwaredir."shell_".uniqid();
 	$fp = fopen($filename, "w");
